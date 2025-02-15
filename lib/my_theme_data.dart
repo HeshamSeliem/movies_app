@@ -5,9 +5,18 @@ import 'package:flutter/material.dart';
 class MyThemeData {
   static Color primaryColor = const Color(0xffFFFFFF);
   static Color darkColor = const Color(0xff121312);
+  static Color commonColor = const Color(0xffF6BD00);
   static ThemeData lightTheme = ThemeData(
     primaryColor: primaryColor,
+   // commonColor :commonColor,
     scaffoldBackgroundColor: darkColor,
+    appBarTheme: AppBarTheme(
+      backgroundColor: darkColor,
+      centerTitle: true,
+      iconTheme: const IconThemeData(
+        color: Color(0xffF6BD00)
+      )
+    ),
     bottomNavigationBarTheme:const BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: true,
