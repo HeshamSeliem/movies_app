@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/provider/my%20provider.dart';
-import 'package:movies_app/tabs/browse_tab/browse_tab.dart';
-import 'package:movies_app/tabs/home_tab/home_tab.dart';
-import 'package:movies_app/tabs/profile_tab/profile_tab.dart';
-import 'package:movies_app/tabs/search_tab/search_tab.dart';
+import 'package:movies_app/screens/tabs/browse_tab/browse_tab.dart';
+import 'package:movies_app/screens/tabs/home_tab/home_tab.dart';
+import 'package:movies_app/screens/tabs/profile_tab/profile_tab.dart';
+import 'package:movies_app/screens/tabs/search_tab/search_tab.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
