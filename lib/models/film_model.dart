@@ -1,5 +1,5 @@
 class FilmModel {
-  String image;
+   String image;
   double rate;
 
    FilmModel({

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/firebase_options.dart';
 import 'package:movies_app/my_theme_data.dart';
 import 'package:movies_app/home_screen.dart';
+import 'package:movies_app/screens/Film_details.dart';
 import 'package:movies_app/screens/auth/create_account.dart';
 import 'package:movies_app/screens/auth/login_screen.dart';
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName : (context)=> LoginScreen(),
         CreateAccount.routeName : (context)=> CreateAccount(),
         HomeScreen.routeName : (context)=> HomeScreen(),
+        FilmDetails.routeName: (context) => FilmDetails(),
       },
     );
   }
