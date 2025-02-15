@@ -6,6 +6,10 @@ class MyThemeData {
   static Color primaryColor = const Color(0xffFFFFFF);
   static Color darkColor = const Color(0xff121312);
   static Color commonColor = const Color(0xffF6BD00);
+  static Color RedBottun = const Color(0xffE82626);
+  static Color SecondaryColor = const Color(0xff282A28);
+
+
   static ThemeData lightTheme = ThemeData(
     primaryColor: primaryColor,
    // commonColor :commonColor,
@@ -17,12 +21,12 @@ class MyThemeData {
         color: Color(0xffF6BD00)
       )
     ),
-    bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+    bottomNavigationBarTheme:BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      backgroundColor: Color(0xff282A28),
+      backgroundColor: SecondaryColor,
       unselectedItemColor: Colors.white,
-      selectedItemColor:  Color(0xffF6BD00),
+      selectedItemColor:  const Color(0xffF6BD00),
       type: BottomNavigationBarType.fixed,
     ),
     textTheme: TextTheme(

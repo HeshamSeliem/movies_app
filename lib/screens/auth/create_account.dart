@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CreateAccount extends StatelessWidget {
-  CreateAccount({super.key});
+                      CreateAccount({super.key});
   static const String routeName = "createAccount";
   TextEditingController nameController = TextEditingController();
   TextEditingController emaillController = TextEditingController();
