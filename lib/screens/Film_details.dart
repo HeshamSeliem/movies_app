@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/models/film_model.dart';
+import 'package:movies_app/screens/tabs/home_tab/horizontalListWidget.dart';
 import '../my_theme_data.dart';
 import 'package:flutter/Cupertino.dart';
 
@@ -14,6 +15,11 @@ class FilmDetails extends StatefulWidget {
 class _FilmDetailsState extends State<FilmDetails> {
   @override
   Widget build(BuildContext context) {
+
+    double Height = MediaQuery.of(context).size.height;
+    double Width = MediaQuery.of(context).size.width;
+
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -21,7 +27,7 @@ class _FilmDetailsState extends State<FilmDetails> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.65,
+              height: Height * 0.65,
               width: double.infinity,
               alignment: Alignment.topCenter,
               child: Stack(
@@ -46,13 +52,13 @@ class _FilmDetailsState extends State<FilmDetails> {
                         stops: const [
                           0.0,
                           0.95
-                        ], // Define where each color starts
-                        tileMode: TileMode.mirror, // Mirror the gradient
+                        ],
+                        tileMode: TileMode.mirror,
                       ),
                     ),
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).padding.top + 16, // Account for status bar height
+                    top: MediaQuery.of(context).padding.top + 16,
                     left: 16,
                     right: 16,
                     child: Row(
@@ -77,7 +83,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                     ),
                   ),
                   Positioned(
-                    bottom: MediaQuery.of(context).size.height * 0.03,
+                    bottom: Height* 0.03,
                     child: Text(
                       "Film Title",
                       style: TextStyle(
@@ -90,17 +96,13 @@ class _FilmDetailsState extends State<FilmDetails> {
                 ],
               ),
             ),
-
-            // Button and Other Content
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Watch Button
                   ElevatedButton(
                     onPressed: () {
-                      // Add your onPressed logic here
                     },
                     child: Text(
                       "Watch",
@@ -135,7 +137,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                   // First Container
                   Container(
                     height: double.infinity,
-                    width: MediaQuery.of(context).size.width * 0.28,
+                    width: Width * 0.28,
                     decoration: BoxDecoration(
                       color: MyThemeData.SecondaryColor,
                       borderRadius:
@@ -164,7 +166,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                   // Second Container
                   Container(
                     height: double.infinity,
-                    width: MediaQuery.of(context).size.width * 0.28,
+                    width: Width * 0.28,
                     decoration: BoxDecoration(
                       color: MyThemeData.SecondaryColor,
                       borderRadius:
@@ -187,7 +189,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                   ),
                   Container(
                     height: double.infinity,
-                    width: MediaQuery.of(context).size.width * 0.28,
+                    width: Width * 0.28,
                     decoration: BoxDecoration(
                       color: MyThemeData.SecondaryColor,
                       borderRadius: BorderRadius.circular(16),
@@ -215,61 +217,152 @@ class _FilmDetailsState extends State<FilmDetails> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
+              height: Height * 0.02,
             ),
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
-                  child: Text("Screen Shots"),
+                  child: Text("Screen Shots",style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),),
                 ),
               ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
+              height: Height* 0.01,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              child: Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.18,
-                child: Image.asset("assets/images/film1.png",
-                  fit: BoxFit.cover,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+
+
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    child: Container(
+                      width: double.infinity,
+                      height: Height* 0.18,
+                      child: Image.asset("assets/images/film1.png",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: Height * 0.02,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    child: Container(
+                      width: double.infinity,
+                      height: Height * 0.18,
+                      child: Image.asset("assets/images/film1.png",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    child: Container(
+                      width: double.infinity,
+                      height: Height * 0.18,
+                      child: Image.asset("assets/images/film1.png",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+
+                ],
+              ),
+            ),
+            Row(
+              children:[
+                Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Text("Similar",style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),),
                 ),
+              ],
+            ),
+            SizedBox(
+              height:Height* 0.02,
+            ),
+            Container(
+              height: Height * 0.6,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                       Hhorizontallistwidget(
+                         model: filmsList[4],
+                         containerHeight: Height * 0.3,
+                         containerWidth: Width * 0.45,
+                       ),
+                       Hhorizontallistwidget(
+                         model: filmsList[5],
+                         containerHeight: Height * 0.3,
+                         containerWidth: Width * 0.45,
+                       ),
+                     ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Hhorizontallistwidget(
+                        model: filmsList[6],
+                        containerHeight: Height * 0.3,
+                        containerWidth: Width * 0.45,
+                      ),
+                      Hhorizontallistwidget(
+                        model: filmsList[7],
+                        containerHeight: Height * 0.3,
+                        containerWidth: Width * 0.45,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
+              height: Height * 0.02,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              child: Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.18,
-                child: Image.asset("assets/images/film1.png",
-                  fit: BoxFit.cover,
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Text("Summary",style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),),
                 ),
-              ),
+              ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
+              height: Height * 0.02,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.18,
-                child: Image.asset("assets/images/film1.png",
-                  fit: BoxFit.cover,
-                ),
+                width: Width,
+                child: Text("Following the events of Spider-Man No Way Home, Doctor Strange unwittingly casts a forbidden spell that accidentally opens up the multiverse. With help from Wong and Scarlet Witch, Strange confronts various versions of himself as well as teaming up with the young America Chavez while traveling through various realities and working to restore reality as he knows it. Along the way, Strange and his allies realize they must take on a powerful new adversary who seeks to take over the multiverse.—Blazer346"),
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
-            ),
-          ],
-        ),
+
+  ],
+      ),
       ),
     );
+
   }
 }

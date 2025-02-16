@@ -9,7 +9,6 @@ class MyThemeData {
   static Color RedBottun = const Color(0xffE82626);
   static Color SecondaryColor = const Color(0xff282A28);
 
-
   static ThemeData lightTheme = ThemeData(
     primaryColor: primaryColor,
    // commonColor :commonColor,
