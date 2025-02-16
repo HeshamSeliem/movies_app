@@ -3,7 +3,6 @@ import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/screens/tabs/home_tab/horizontalListWidget.dart';
 import '../my_theme_data.dart';
 import 'package:flutter/Cupertino.dart';
-
 class FilmDetails extends StatefulWidget {
   const FilmDetails({super.key});
   static const String routeName = "FilmDetails";

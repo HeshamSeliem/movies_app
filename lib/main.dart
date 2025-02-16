@@ -7,6 +7,8 @@ import 'package:movies_app/screens/Film_details.dart';
 import 'package:movies_app/screens/auth/create_account.dart';
 import 'package:movies_app/screens/auth/login_screen.dart';
 
+import 'screens/onBoarding.dart';
+
 void main() async{
    WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -25,12 +27,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
        theme: MyThemeData.lightTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginScreen.routeName,
+      initialRoute: Onboarding.routeName,
       routes: {
         LoginScreen.routeName : (context)=> LoginScreen(),
         CreateAccount.routeName : (context)=> CreateAccount(),
         HomeScreen.routeName : (context)=> HomeScreen(),
         FilmDetails.routeName: (context) => FilmDetails(),
+        Onboarding.routeName: (context) => Onboarding(),
       },
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/my_theme_data.dart';
-import 'package:movies_app/screens/Film_details.dart';
+
 import 'package:movies_app/screens/tabs/home_tab/horizontalListWidget.dart';
 
 class HomeTab extends StatelessWidget {
