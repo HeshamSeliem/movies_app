@@ -3,18 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/firebase_options.dart';
 import 'package:movies_app/my_theme_data.dart';
 import 'package:movies_app/home_screen.dart';
+
+import 'package:movies_app/provider/user_provider.dart';
+
 import 'package:movies_app/screens/Film_details.dart';
 import 'package:movies_app/screens/auth/create_account.dart';
 import 'package:movies_app/screens/auth/login_screen.dart';
+import 'package:provider/provider.dart';
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
 import 'screens/onBoarding.dart';
 
 void main() async{
    WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
-  runApp(const MyApp());
+  );
+  runApp(ChangeNotifierProvider(
+      create: (context) => UserProvider(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,9 +34,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    var provider = Provider.of<UserProvider>(context);
+
+
     return MaterialApp(
-       theme: MyThemeData.lightTheme,
+      theme: MyThemeData.lightTheme,
       debugShowCheckedModeBanner: false,
+
+      initialRoute: provider.firebaseUser == null
+          ? LoginScreen.routeName
+          : HomeScreen.routeName,
+      routes: {
+        LoginScreen.routeName: (context) => LoginScreen(),
+        CreateAccount.routeName: (context) => CreateAccount(),
+        HomeScreen.routeName: (context) => HomeScreen(),
+
       initialRoute: Onboarding.routeName,
       routes: {
         LoginScreen.routeName : (context)=> LoginScreen(),
@@ -34,6 +56,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName : (context)=> HomeScreen(),
         FilmDetails.routeName: (context) => FilmDetails(),
         Onboarding.routeName: (context) => Onboarding(),
+
       },
     );
   }
