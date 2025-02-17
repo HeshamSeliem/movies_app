@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/firebase/firebase_manager.dart';
 import 'package:movies_app/home_screen.dart';
+import 'package:movies_app/provider/user_provider.dart';
 import 'package:movies_app/screens/auth/create_account.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
@@ -11,6 +14,7 @@ class LoginScreen extends StatelessWidget {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var userprovider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -113,7 +117,49 @@ class LoginScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, HomeScreen.routeName);
+                  FirebaseManager.logIn(
+                      emaillController.text, passwordController.text, () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const AlertDialog(
+                        title: Center(child: CircularProgressIndicator()),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    );
+                  },
+                      //on success
+                      () {
+     //this line to read user data from firestore and pass it to provider to hold user data to use it in profile
+     // to change the screen and make rebuild to it                   
+                    userprovider.initUser();
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      HomeScreen.routeName,
+                      (route) => false,
+                    );
+                  },
+                      //on error
+                      (message) {
+                    Navigator.pop(context);
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: const Color(0xffF6BD00),
+                        title: Text("some thing went error"),
+                        content: Text(
+                          message,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        actions: [
+                          ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("OK"))
+                        ],
+                      ),
+                    );
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
@@ -169,7 +215,7 @@ class LoginScreen extends StatelessWidget {
                         .bodyMedium!
                         .copyWith(color: const Color(0xffF6BD00)),
                   ),
-                   Container(
+                  Container(
                     width: 90,
                     height: 1.5, // Set height for thickness
                     color: const Color(0xffF6BD00),
