@@ -6,9 +6,15 @@ import 'package:movies_app/screens/tabs/profile_tab/profile_tab.dart';
 import 'package:movies_app/screens/tabs/search_tab/search_tab.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
    HomeScreen({super.key});
  static const String routeName = "home";
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -39,14 +45,15 @@ class HomeScreen extends StatelessWidget {
               label: ""
               ),
           ],
-          
+
           ),
-       
+
           body: tabs[provider.selectedIndex] ,
       );
       },
     );
   }
+
    List<Widget> tabs = [
     HomeTab(),
     SearchTab(),

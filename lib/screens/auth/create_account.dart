@@ -3,7 +3,7 @@ import 'package:movies_app/firebase/firebase_manager.dart';
 
 // ignore: must_be_immutable
 class CreateAccount extends StatelessWidget {
-  CreateAccount({super.key});
+                      CreateAccount({super.key});
   static const String routeName = "createAccount";
 
   //final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
