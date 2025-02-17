@@ -9,13 +9,8 @@ import 'package:movies_app/provider/user_provider.dart';
 import 'package:movies_app/screens/Film_details.dart';
 import 'package:movies_app/screens/auth/create_account.dart';
 import 'package:movies_app/screens/auth/login_screen.dart';
+import 'package:movies_app/screens/onBoarding.dart';
 import 'package:provider/provider.dart';
-
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-import 'screens/onBoarding.dart';
 
 void main() async{
    WidgetsFlutterBinding.ensureInitialized();
@@ -44,12 +39,7 @@ class MyApp extends StatelessWidget {
       initialRoute: provider.firebaseUser == null
           ? LoginScreen.routeName
           : HomeScreen.routeName,
-      routes: {
-        LoginScreen.routeName: (context) => LoginScreen(),
-        CreateAccount.routeName: (context) => CreateAccount(),
-        HomeScreen.routeName: (context) => HomeScreen(),
-
-      initialRoute: Onboarding.routeName,
+     
       routes: {
         LoginScreen.routeName : (context)=> LoginScreen(),
         CreateAccount.routeName : (context)=> CreateAccount(),
