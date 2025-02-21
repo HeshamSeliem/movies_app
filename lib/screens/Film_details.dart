@@ -1,23 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/screens/tabs/home_tab/horizontalListWidget.dart';
+import '../models/cast_model.dart';
 import '../my_theme_data.dart';
 import 'package:flutter/Cupertino.dart';
+
+import 'cast_widget.dart';
+
 class FilmDetails extends StatefulWidget {
   const FilmDetails({super.key});
   static const String routeName = "FilmDetails";
 
+
+
   @override
   State<FilmDetails> createState() => _FilmDetailsState();
 }
-
+final List<CastModel> castList = [
+  CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 1',
+    character: 'Role 1',
+  ),
+  CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 2',
+    character: 'Role 2',
+  ),
+  CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 3',
+    character: 'Role 3',
+  ),CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 3',
+    character: 'Role 3',
+  ),CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 3',
+    character: 'Role 3',
+  ),CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 3',
+    character: 'Role 3',
+  ),
+];
 class _FilmDetailsState extends State<FilmDetails> {
   @override
   Widget build(BuildContext context) {
-
     double Height = MediaQuery.of(context).size.height;
     double Width = MediaQuery.of(context).size.width;
-
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -32,7 +64,6 @@ class _FilmDetailsState extends State<FilmDetails> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-
                   Image.asset(
                     "assets/images/film1.png",
                     fit: BoxFit.cover,
@@ -48,10 +79,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                           MyThemeData.darkColor.withOpacity(0.2),
                           Color(0xff000000).withOpacity(0.92),
                         ],
-                        stops: const [
-                          0.0,
-                          0.95
-                        ],
+                        stops: const [0.0, 0.95],
                         tileMode: TileMode.mirror,
                       ),
                     ),
@@ -68,7 +96,8 @@ class _FilmDetailsState extends State<FilmDetails> {
                           onPressed: () {
                             Navigator.pop(context); // Navigate back
                           },
-                          icon: Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                          icon: Icon(Icons.arrow_back_ios_new,
+                              color: Colors.white),
                         ),
 
                         // Bookmark Button
@@ -76,13 +105,14 @@ class _FilmDetailsState extends State<FilmDetails> {
                           onPressed: () {
                             // Add bookmark functionality here
                           },
-                          icon: Icon(Icons.bookmark_outlined, color: Colors.white),
+                          icon: Icon(Icons.bookmark_outlined,
+                              color: Colors.white),
                         ),
                       ],
                     ),
                   ),
                   Positioned(
-                    bottom: Height* 0.03,
+                    bottom: Height * 0.03,
                     child: Text(
                       "Film Title",
                       style: TextStyle(
@@ -101,8 +131,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     child: Text(
                       "Watch",
                       style: TextStyle(
@@ -222,28 +251,30 @@ class _FilmDetailsState extends State<FilmDetails> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
-                  child: Text("Screen Shots",style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),),
+                  child: Text(
+                    "Screen Shots",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ],
             ),
             SizedBox(
-              height: Height* 0.01,
+              height: Height * 0.01,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-
-
                   ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                     child: Container(
                       width: double.infinity,
-                      height: Height* 0.18,
-                      child: Image.asset("assets/images/film1.png",
+                      height: Height * 0.18,
+                      child: Image.asset(
+                        "assets/images/film1.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -256,7 +287,8 @@ class _FilmDetailsState extends State<FilmDetails> {
                     child: Container(
                       width: double.infinity,
                       height: Height * 0.18,
-                      child: Image.asset("assets/images/film1.png",
+                      child: Image.asset(
+                        "assets/images/film1.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -269,7 +301,8 @@ class _FilmDetailsState extends State<FilmDetails> {
                     child: Container(
                       width: double.infinity,
                       height: Height * 0.18,
-                      child: Image.asset("assets/images/film1.png",
+                      child: Image.asset(
+                        "assets/images/film1.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -277,23 +310,25 @@ class _FilmDetailsState extends State<FilmDetails> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-
                 ],
               ),
             ),
             Row(
-              children:[
+              children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
-                  child: Text("Similar",style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),),
+                  child: Text(
+                    "Similar",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ],
             ),
             SizedBox(
-              height:Height* 0.02,
+              height: Height * 0.02,
             ),
             Container(
               height: Height * 0.6,
@@ -303,17 +338,17 @@ class _FilmDetailsState extends State<FilmDetails> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                       Hhorizontallistwidget(
-                         model: filmsList[4],
-                         containerHeight: Height * 0.3,
-                         containerWidth: Width * 0.45,
-                       ),
-                       Hhorizontallistwidget(
-                         model: filmsList[5],
-                         containerHeight: Height * 0.3,
-                         containerWidth: Width * 0.45,
-                       ),
-                     ],
+                      Hhorizontallistwidget(
+                        model: filmsList[4],
+                        containerHeight: Height * 0.3,
+                        containerWidth: Width * 0.45,
+                      ),
+                      Hhorizontallistwidget(
+                        model: filmsList[5],
+                        containerHeight: Height * 0.3,
+                        containerWidth: Width * 0.45,
+                      ),
+                    ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -340,10 +375,13 @@ class _FilmDetailsState extends State<FilmDetails> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
-                  child: Text("Summary",style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),),
+                  child: Text(
+                    "Summary",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -354,14 +392,41 @@ class _FilmDetailsState extends State<FilmDetails> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
                 width: Width,
-                child: Text("Following the events of Spider-Man No Way Home, Doctor Strange unwittingly casts a forbidden spell that accidentally opens up the multiverse. With help from Wong and Scarlet Witch, Strange confronts various versions of himself as well as teaming up with the young America Chavez while traveling through various realities and working to restore reality as he knows it. Along the way, Strange and his allies realize they must take on a powerful new adversary who seeks to take over the multiverse.—Blazer346"),
+                child: Text(
+                    "Following the events of Spider-Man No Way Home, Doctor Strange unwittingly casts a forbidden spell that accidentally opens up the multiverse. With help from Wong and Scarlet Witch, Strange confronts various versions of himself as well as teaming up with the young America Chavez while traveling through various realities and working to restore reality as he knows it. Along the way, Strange and his allies realize they must take on a powerful new adversary who seeks to take over the multiverse.—Blazer346"),
               ),
             ),
-
-  ],
-      ),
+            SizedBox(
+              height: Height * 0.02,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Text(
+                    "Cast",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: Height * 0.02,
+            ),
+            Column(
+              children: castList.map((cast) {
+                return Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: CastWidget(cast: cast),
+                );
+              }).toList(),
+            ),
+          ],
+        ),
       ),
     );
-
   }
 }
