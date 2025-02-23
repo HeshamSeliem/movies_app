@@ -7,7 +7,6 @@ import 'package:movies_app/screens/web_view_screen.dart';
 import '../my_theme_data.dart';
 import 'package:flutter/Cupertino.dart';
 
-
 //import '../models/cast_model.dart';
 //import '../my_theme_data.dart';
 //import 'package:flutter/Cupertino.dart';
@@ -24,35 +23,35 @@ class FilmDetails extends StatefulWidget {
   @override
   State<FilmDetails> createState() => _FilmDetailsState();
 }
-final List<CastModel> castList = [
-  CastModel(
-    img: 'https://pixabay.com/images/search/network/',
-    name: 'Actor 1',
-    character: 'Role 1',
-  ),
-  CastModel(
-    img: 'https://pixabay.com/images/search/network/',
-    name: 'Actor 2',
-    character: 'Role 2',
-  ),
-  CastModel(
-    img: 'https://pixabay.com/images/search/network/',
-    name: 'Actor 3',
-    character: 'Role 3',
-  ),CastModel(
-    img: 'https://pixabay.com/images/search/network/',
-    name: 'Actor 3',
-    character: 'Role 3',
-  ),CastModel(
-    img: 'https://pixabay.com/images/search/network/',
-    name: 'Actor 3',
-    character: 'Role 3',
-  ),CastModel(
-    img: 'https://pixabay.com/images/search/network/',
-    name: 'Actor 3',
-    character: 'Role 3',
-  ),
-];
+// final List<CastModel> castList = [
+//   CastModel(
+//     img: 'https://pixabay.com/images/search/network/',
+//     name: 'Actor 1',
+//     character: 'Role 1',
+//   ),
+//   CastModel(
+//     img: 'https://pixabay.com/images/search/network/',
+//     name: 'Actor 2',
+//     character: 'Role 2',
+//   ),
+//   CastModel(
+//     img: 'https://pixabay.com/images/search/network/',
+//     name: 'Actor 3',
+//     character: 'Role 3',
+//   ),CastModel(
+//     img: 'https://pixabay.com/images/search/network/',
+//     name: 'Actor 3',
+//     character: 'Role 3',
+//   ),CastModel(
+//     img: 'https://pixabay.com/images/search/network/',
+//     name: 'Actor 3',
+//     character: 'Role 3',
+//   ),CastModel(
+//     img: 'https://pixabay.com/images/search/network/',
+//     name: 'Actor 3',
+//     character: 'Role 3',
+//   ),
+// ];
 class _FilmDetailsState extends State<FilmDetails> {
   @override
   Widget build(BuildContext context) {
@@ -378,11 +377,11 @@ class _FilmDetailsState extends State<FilmDetails> {
             SizedBox(
               height: Height * 0.02,
             ),
-            Container(
-              height: Height * 0.6,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
+            // Container(
+            //   height: Height * 0.6,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: [
 
                   // Column(
                   //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -452,8 +451,10 @@ class _FilmDetailsState extends State<FilmDetails> {
             SizedBox(
               height: Height * 0.02,
             ),
-           
+                ]  
       ),
-    );
+        
+        ),
+           );
   }
 }
