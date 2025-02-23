@@ -2,22 +2,64 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/models/films_response.dart';
 import 'package:movies_app/screens/tabs/home_tab/horizontalListWidget.dart';
+
 import 'package:movies_app/screens/web_view_screen.dart';
 import '../my_theme_data.dart';
 import 'package:flutter/Cupertino.dart';
+
+
+//import '../models/cast_model.dart';
+//import '../my_theme_data.dart';
+//import 'package:flutter/Cupertino.dart';
+
+//import 'cast_widget.dart';
+
 
 class FilmDetails extends StatefulWidget {
   const FilmDetails({super.key});
   static const String routeName = "FilmDetails";
 
+
+
   @override
   State<FilmDetails> createState() => _FilmDetailsState();
 }
-
+final List<CastModel> castList = [
+  CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 1',
+    character: 'Role 1',
+  ),
+  CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 2',
+    character: 'Role 2',
+  ),
+  CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 3',
+    character: 'Role 3',
+  ),CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 3',
+    character: 'Role 3',
+  ),CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 3',
+    character: 'Role 3',
+  ),CastModel(
+    img: 'https://pixabay.com/images/search/network/',
+    name: 'Actor 3',
+    character: 'Role 3',
+  ),
+];
 class _FilmDetailsState extends State<FilmDetails> {
   @override
   Widget build(BuildContext context) {
+
     var movie = ModalRoute.of(context)!.settings.arguments as Movies;
+
+
     double Height = MediaQuery.of(context).size.height;
     double Width = MediaQuery.of(context).size.width;
 
@@ -34,8 +76,11 @@ class _FilmDetailsState extends State<FilmDetails> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
+
                   Image.network(
                     movie.mediumCoverImage ?? "",
+
+                 
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
@@ -101,6 +146,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   ElevatedButton(
+
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -111,6 +157,9 @@ class _FilmDetailsState extends State<FilmDetails> {
                                 )),
                       );
                     },
+
+                    
+                   
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         MyThemeData.RedBottun,
@@ -229,7 +278,11 @@ class _FilmDetailsState extends State<FilmDetails> {
             const Row(
               children: [
                 Padding(
+
                   padding:  EdgeInsets.only(left: 16),
+
+                  
+
                   child: Text(
                     "Screen Shots",
                     style: TextStyle(
@@ -252,8 +305,12 @@ class _FilmDetailsState extends State<FilmDetails> {
                     child: SizedBox(
                       width: double.infinity,
                       height: Height * 0.18,
+
                       child: Image.network(
                         movie.smallCoverImage ?? "",
+
+                      
+
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -266,8 +323,12 @@ class _FilmDetailsState extends State<FilmDetails> {
                     child: SizedBox(
                       width: double.infinity,
                       height: Height * 0.18,
+
                       child: Image.network(
                         movie.mediumCoverImage ?? "",
+
+                      
+
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -280,8 +341,12 @@ class _FilmDetailsState extends State<FilmDetails> {
                     child: SizedBox(
                       width: double.infinity,
                       height: Height * 0.18,
+
                       child: Image.network(
                         movie.largeCoverImage ?? "",
+
+                      
+
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -292,7 +357,11 @@ class _FilmDetailsState extends State<FilmDetails> {
                 ],
               ),
             ),
+
            const Row(
+
+           
+
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
@@ -314,6 +383,7 @@ class _FilmDetailsState extends State<FilmDetails> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+
                   // Column(
                   //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   //   children: [
@@ -344,9 +414,8 @@ class _FilmDetailsState extends State<FilmDetails> {
                   //     ),
                   //   ],
                   // ),
-                ],
-              ),
-            ),
+
+                 
             SizedBox(
               height: Height * 0.02,
             ),
@@ -373,13 +442,17 @@ class _FilmDetailsState extends State<FilmDetails> {
                 alignment: Alignment.topCenter,
                 width: Width,
                 child: Text(
+
                    (movie.summary == "")? "No Summary to this movie "
                    :movie.summary ?? ""
                    ),
               ),
             ),
-          ],
-        ),
+
+            SizedBox(
+              height: Height * 0.02,
+            ),
+           
       ),
     );
   }
