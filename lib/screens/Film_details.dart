@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/models/film_model.dart';
+import 'package:movies_app/models/films_response.dart';
 import 'package:movies_app/screens/tabs/home_tab/horizontalListWidget.dart';
+import 'package:movies_app/screens/web_view_screen.dart';
 import '../my_theme_data.dart';
 import 'package:flutter/Cupertino.dart';
+
 class FilmDetails extends StatefulWidget {
   const FilmDetails({super.key});
   static const String routeName = "FilmDetails";
@@ -14,10 +17,9 @@ class FilmDetails extends StatefulWidget {
 class _FilmDetailsState extends State<FilmDetails> {
   @override
   Widget build(BuildContext context) {
-
+    var movie = ModalRoute.of(context)!.settings.arguments as Movies;
     double Height = MediaQuery.of(context).size.height;
     double Width = MediaQuery.of(context).size.width;
-
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -32,9 +34,8 @@ class _FilmDetailsState extends State<FilmDetails> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-
-                  Image.asset(
-                    "assets/images/film1.png",
+                  Image.network(
+                    movie.mediumCoverImage ?? "",
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
@@ -48,10 +49,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                           MyThemeData.darkColor.withOpacity(0.2),
                           Color(0xff000000).withOpacity(0.92),
                         ],
-                        stops: const [
-                          0.0,
-                          0.95
-                        ],
+                        stops: const [0.0, 0.95],
                         tileMode: TileMode.mirror,
                       ),
                     ),
@@ -68,7 +66,8 @@ class _FilmDetailsState extends State<FilmDetails> {
                           onPressed: () {
                             Navigator.pop(context); // Navigate back
                           },
-                          icon: Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                          icon: Icon(Icons.arrow_back_ios_new,
+                              color: Colors.white),
                         ),
 
                         // Bookmark Button
@@ -76,16 +75,17 @@ class _FilmDetailsState extends State<FilmDetails> {
                           onPressed: () {
                             // Add bookmark functionality here
                           },
-                          icon: Icon(Icons.bookmark_outlined, color: Colors.white),
+                          icon: Icon(Icons.bookmark_outlined,
+                              color: Colors.white),
                         ),
                       ],
                     ),
                   ),
                   Positioned(
-                    bottom: Height* 0.03,
+                    bottom: Height * 0.03,
                     child: Text(
-                      "Film Title",
-                      style: TextStyle(
+                      movie.title ?? "",  // the title of movie
+                      style: const TextStyle(
                         fontSize: 24,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -102,15 +102,15 @@ class _FilmDetailsState extends State<FilmDetails> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                WebViewApp(url: movie.url ?? "",
+                                title: movie.title ?? ""
+                                )),
+                      );
                     },
-                    child: Text(
-                      "Watch",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: MyThemeData.primaryColor,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         MyThemeData.RedBottun,
@@ -124,11 +124,19 @@ class _FilmDetailsState extends State<FilmDetails> {
                         ),
                       ),
                     ),
+                    child: Text(
+                      "Watch",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: MyThemeData.primaryColor,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               height: 47,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -147,7 +155,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.favorite),
+                          icon: const Icon(Icons.favorite),
                           color: MyThemeData.commonColor,
                         ),
                         Text(
@@ -176,7 +184,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                       children: [
                         Icon(Icons.timelapse, color: MyThemeData.commonColor),
                         Text(
-                          "90",
+                          movie.runtime.toString(),
                           style: TextStyle(
                             color: MyThemeData.primaryColor,
                             fontSize: 24,
@@ -198,11 +206,11 @@ class _FilmDetailsState extends State<FilmDetails> {
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.star),
+                          icon:const Icon(Icons.star),
                           color: MyThemeData.commonColor,
                         ),
                         Text(
-                          "7.6",
+                          movie.rating.toString(), // show the rate of movie
                           style: TextStyle(
                             color: MyThemeData.primaryColor,
                             fontSize: 24,
@@ -218,32 +226,34 @@ class _FilmDetailsState extends State<FilmDetails> {
             SizedBox(
               height: Height * 0.02,
             ),
-            Row(
+            const Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: Text("Screen Shots",style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),),
+                  padding:  EdgeInsets.only(left: 16),
+                  child: Text(
+                    "Screen Shots",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ],
             ),
             SizedBox(
-              height: Height* 0.01,
+              height: Height * 0.01,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-
-
                   ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    child: Container(
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    child: SizedBox(
                       width: double.infinity,
-                      height: Height* 0.18,
-                      child: Image.asset("assets/images/film1.png",
+                      height: Height * 0.18,
+                      child: Image.network(
+                        movie.smallCoverImage ?? "",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -252,11 +262,12 @@ class _FilmDetailsState extends State<FilmDetails> {
                     height: Height * 0.02,
                   ),
                   ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    child: Container(
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    child: SizedBox(
                       width: double.infinity,
                       height: Height * 0.18,
-                      child: Image.asset("assets/images/film1.png",
+                      child: Image.network(
+                        movie.mediumCoverImage ?? "",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -266,10 +277,11 @@ class _FilmDetailsState extends State<FilmDetails> {
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(16)),
-                    child: Container(
+                    child: SizedBox(
                       width: double.infinity,
                       height: Height * 0.18,
-                      child: Image.asset("assets/images/film1.png",
+                      child: Image.network(
+                        movie.largeCoverImage ?? "",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -277,73 +289,78 @@ class _FilmDetailsState extends State<FilmDetails> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-
                 ],
               ),
             ),
-            Row(
-              children:[
+           const Row(
+              children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
-                  child: Text("Similar",style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),),
+                  child: Text(
+                    "Similar",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ],
             ),
             SizedBox(
-              height:Height* 0.02,
+              height: Height * 0.02,
             ),
             Container(
               height: Height * 0.6,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                       Hhorizontallistwidget(
-                         model: filmsList[4],
-                         containerHeight: Height * 0.3,
-                         containerWidth: Width * 0.45,
-                       ),
-                       Hhorizontallistwidget(
-                         model: filmsList[5],
-                         containerHeight: Height * 0.3,
-                         containerWidth: Width * 0.45,
-                       ),
-                     ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Hhorizontallistwidget(
-                        model: filmsList[6],
-                        containerHeight: Height * 0.3,
-                        containerWidth: Width * 0.45,
-                      ),
-                      Hhorizontallistwidget(
-                        model: filmsList[7],
-                        containerHeight: Height * 0.3,
-                        containerWidth: Width * 0.45,
-                      ),
-                    ],
-                  ),
+                  // Column(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //      Hhorizontallistwidget(
+                  //        model: filmsList[4],
+                  //        containerHeight: Height * 0.3,
+                  //        containerWidth: Width * 0.45,
+                  //      ),
+                  //      Hhorizontallistwidget(
+                  //        model: filmsList[5],
+                  //        containerHeight: Height * 0.3,
+                  //        containerWidth: Width * 0.45,
+                  //      ),
+                  //    ],
+                  // ),
+                  // Column(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //     Hhorizontallistwidget(
+                  //       model: filmsList[6],
+                  //       containerHeight: Height * 0.3,
+                  //       containerWidth: Width * 0.45,
+                  //     ),
+                  //     Hhorizontallistwidget(
+                  //       model: filmsList[7],
+                  //       containerHeight: Height * 0.3,
+                  //       containerWidth: Width * 0.45,
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
             SizedBox(
               height: Height * 0.02,
             ),
-            Row(
+           const Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
-                  child: Text("Summary",style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),),
+                  child: Text(
+                    "Summary",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -353,15 +370,17 @@ class _FilmDetailsState extends State<FilmDetails> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
+                alignment: Alignment.topCenter,
                 width: Width,
-                child: Text("Following the events of Spider-Man No Way Home, Doctor Strange unwittingly casts a forbidden spell that accidentally opens up the multiverse. With help from Wong and Scarlet Witch, Strange confronts various versions of himself as well as teaming up with the young America Chavez while traveling through various realities and working to restore reality as he knows it. Along the way, Strange and his allies realize they must take on a powerful new adversary who seeks to take over the multiverse.—Blazer346"),
+                child: Text(
+                   (movie.summary == "")? "No Summary to this movie "
+                   :movie.summary ?? ""
+                   ),
               ),
             ),
-
-  ],
-      ),
+          ],
+        ),
       ),
     );
-
   }
 }

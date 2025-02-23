@@ -10,6 +10,7 @@ import 'package:movies_app/screens/Film_details.dart';
 import 'package:movies_app/screens/auth/create_account.dart';
 import 'package:movies_app/screens/auth/login_screen.dart';
 import 'package:movies_app/screens/onBoarding.dart';
+import 'package:movies_app/screens/web_view_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName : (context)=> HomeScreen(),
         FilmDetails.routeName: (context) => FilmDetails(),
         Onboarding.routeName: (context) => Onboarding(),
+       
 
       },
     );
