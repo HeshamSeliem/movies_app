@@ -17,22 +17,20 @@ class BrowseTab extends StatelessWidget {
           return Center(child: Text("Error"));
         } else {
           var data = snapshot.data?.data?.movies ?? [];
-          return Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // Number of columns
-                crossAxisSpacing: 10, // Space between columns
-                mainAxisSpacing: 10, // Space between rows
-                childAspectRatio: 2/3, // Aspect ratio of grid items
-              ),
-              itemCount: data.length, // Total items
-              itemBuilder: (context, index) {
-                return Hhorizontallistwidget(
-                    movie: data[index],
-                    containerHeight: 350,
-                    containerWidth: 230);
-              },
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Number of columns
+              crossAxisSpacing: 10, // Space between columns
+              mainAxisSpacing: 10, // Space between rows
+              childAspectRatio: 2/3, // Aspect ratio of grid items
             ),
+            itemCount: data.length, // Total items
+            itemBuilder: (context, index) {
+              return Hhorizontallistwidget(
+                  movie: data[index],
+                  containerHeight: 350,
+                  containerWidth: 230);
+            },
           );
         }
       },

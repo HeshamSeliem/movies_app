@@ -31,8 +31,9 @@ class _HhorizontallistwidgetState extends State<Hhorizontallistwidget> {
                   children: [
                     ClipRRect(
                       child: Image.network(
-                        widget.movie.mediumCoverImage ?? "",
+                        widget.movie.mediumCoverImage ?? "https://th.bing.com/th/id/OIP.PLKhzDLPYVd_DiqnZkpjPgHaEK?rs=1&pid=ImgDetMain",
                       fit: BoxFit.fill,
+                      height: 350,
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),

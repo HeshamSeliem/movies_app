@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/api_lists/main_movies_list.dart';
+import 'package:movies_app/api_lists/suggested_movies_list.dart';
 import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/my_theme_data.dart';
 
@@ -58,22 +59,10 @@ class HomeTab extends StatelessWidget {
                  ],
                ),
                SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-               
-              //  SizedBox(
-              //   height: 180,
-              //    child: ListView.separated(
-              //     scrollDirection: Axis.horizontal,
-              //     itemBuilder: (context, index) {
-              //       return Hhorizontallistwidget(
-              //         model: filmsList[index],
-              //         containerHeight: 180,
-              //         containerWidth: 100,
-              //       );
-              //     }, 
-              //     separatorBuilder: (context, index) => const SizedBox(width: 20,), 
-              //     itemCount: filmsList.length
-              //     ),
-              //  ),
+             // this part resbonsible for viewing the suggested movies list
+                 SuggestedMoviesList(),
+                   
+                   
             ],
           ),
         ),
