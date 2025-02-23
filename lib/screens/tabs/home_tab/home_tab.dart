@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/api_lists/main_movies_list.dart';
 import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/my_theme_data.dart';
 
 import 'package:movies_app/screens/tabs/home_tab/horizontalListWidget.dart';
+import 'package:movies_app/serveces/api_manager.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -24,22 +26,10 @@ class HomeTab extends StatelessWidget {
               ),
               const SizedBox(
                 height: 10,
-              ),
-               SizedBox(
-                height: 350,
-                 child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Hhorizontallistwidget(
-                      model: filmsList[index],
-                      containerHeight: 350,
-                      containerWidth: 230,
-                    );
-                  },
-                  separatorBuilder: (context, index) => const SizedBox(width: 20,),
-                  itemCount: filmsList.length
-                  ),
-               ),
+              ), 
+              // this part resbonsible for the main movies list
+                MainMoviesList(),
+             
                Image.asset("assets/images/watch_now.png"),
                Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,21 +58,22 @@ class HomeTab extends StatelessWidget {
                  ],
                ),
                SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-               SizedBox(
-                height: 180,
-                 child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Hhorizontallistwidget(
-                      model: filmsList[index],
-                      containerHeight: 180,
-                      containerWidth: 100,
-                    );
-                  }, 
-                  separatorBuilder: (context, index) => const SizedBox(width: 20,), 
-                  itemCount: filmsList.length
-                  ),
-               ),
+               
+              //  SizedBox(
+              //   height: 180,
+              //    child: ListView.separated(
+              //     scrollDirection: Axis.horizontal,
+              //     itemBuilder: (context, index) {
+              //       return Hhorizontallistwidget(
+              //         model: filmsList[index],
+              //         containerHeight: 180,
+              //         containerWidth: 100,
+              //       );
+              //     }, 
+              //     separatorBuilder: (context, index) => const SizedBox(width: 20,), 
+              //     itemCount: filmsList.length
+              //     ),
+              //  ),
             ],
           ),
         ),
