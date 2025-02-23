@@ -44,7 +44,7 @@ class FirebaseManager {
       credential.user!
           .sendEmailVerification(); // this line will send emaill verification to the logged account
       UserModel userModel = UserModel(
-             id: credential.user!.uid, 
+             id: credential.user!.uid,
              name: name,
               email: emailAddress,
                phoneNumber: phoneNumber
@@ -87,8 +87,8 @@ class FirebaseManager {
 
   // this function to read user data from firestore and pass it to provider to hold user data to use it in profile
  static Future<UserModel?> readUser()async{
-      
-    var collection = getUserCollection(); 
+
+    var collection = getUserCollection();
     DocumentSnapshot<UserModel> docRev =await collection.doc(FirebaseAuth.instance.currentUser!.uid).get(); // now i hold the user document
     return docRev.data();
   }
@@ -96,5 +96,7 @@ class FirebaseManager {
   {
    await FirebaseAuth.instance.signOut();
   }
+
+  signOut() {}
 }
 
