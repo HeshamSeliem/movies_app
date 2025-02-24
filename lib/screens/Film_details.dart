@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/api_lists/suggested_movies_list.dart';
+import 'package:movies_app/firebase/firebase_manager.dart';
 import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/models/films_response.dart';
+import 'package:movies_app/models/watchListModel.dart';
 import 'package:movies_app/screens/tabs/home_tab/horizontalListWidget.dart';
 
 import 'package:movies_app/screens/web_view_screen.dart';
@@ -15,8 +19,9 @@ import 'package:flutter/Cupertino.dart';
 //import 'cast_widget.dart';
 
 class FilmDetails extends StatefulWidget {
-  const FilmDetails({super.key});
+  FilmDetails({super.key});
   static const String routeName = "FilmDetails";
+  Color iconColor = Colors.white;
 
   @override
   State<FilmDetails> createState() => _FilmDetailsState();
@@ -110,10 +115,22 @@ class _FilmDetailsState extends State<FilmDetails> {
                       // Bookmark Button
                       IconButton(
                         onPressed: () {
+                          widget.iconColor = Colors.yellow;
+                             setState(() {});
+               //now i create a model and passed it to firebase manager to add it to the firestore              
+                             WatchlistModel film = WatchlistModel(
+                              id: FirebaseAuth.instance.currentUser!.uid, // the id of user
+                               image: movie.mediumCoverImage.toString(), // the image of movie
+                                rating: movie.rating!.toDouble(),
+                                );
+                              FirebaseManager.addMovies(film);  
                           // Add bookmark functionality here
                         },
-                        icon:
-                            Icon(Icons.bookmark_outlined, color: Colors.white),
+                        icon: Icon(
+                          Icons.bookmark_outlined,
+                          color: widget.iconColor,
+                          size: 40,
+                        ),
                       ),
                     ],
                   ),
@@ -344,7 +361,7 @@ class _FilmDetailsState extends State<FilmDetails> {
           const Row(
             children: [
               Padding(
-                padding:  EdgeInsets.only(left: 16),
+                padding: EdgeInsets.only(left: 16),
                 child: Text(
                   "Similar",
                   style: TextStyle(

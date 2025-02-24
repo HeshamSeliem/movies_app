@@ -12,9 +12,9 @@ class BrowseTab extends StatelessWidget {
       future: ApiManager.getMoviesList(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const  Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text("Error"));
+          return const Center(child: Text("Error"));
         } else {
           var data = snapshot.data?.data?.movies ?? [];
           return GridView.builder(

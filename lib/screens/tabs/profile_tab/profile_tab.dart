@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/firebase/firebase_manager.dart';
+import 'package:movies_app/models/watchListModel.dart';
 import 'package:movies_app/provider/user_provider.dart';
 import 'package:movies_app/screens/auth/login_screen.dart';
 import 'package:movies_app/screens/Text_Profile.dart';
+import 'package:movies_app/screens/tabs/profile_tab/gridview_content.dart';
 import 'package:provider/provider.dart';
 
 import '../../../my_theme_data.dart';
@@ -24,7 +27,7 @@ class ProfileTab extends StatelessWidget {
     }
 
     return Scaffold(
-backgroundColor: MyThemeData.darkColor,
+      backgroundColor: MyThemeData.darkColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -41,14 +44,14 @@ backgroundColor: MyThemeData.darkColor,
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 24),
+                        padding: const EdgeInsets.only(left: 16),
                         child: Column(
                           children: [
                             // Profile Picture
                             Container(
-                              width: 150,
+                              width: 120,
                               height: 118,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white,
                                 image: DecorationImage(
@@ -67,7 +70,7 @@ backgroundColor: MyThemeData.darkColor,
                           ],
                         ),
                       ),
-                      SizedBox(width: width * 0.05),
+                      // SizedBox(width: width * 0.01),
                       // Wishlist and History Counts
                       Row(
                         children: [
@@ -93,19 +96,19 @@ backgroundColor: MyThemeData.darkColor,
                             ),
                           );
                         },
-                        child: TextProfile(
-                          text: ("Edit Profile"),
-                          TextSize: 20,
-                          color: MyThemeData.darkColor,
-                        ),
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
                           backgroundColor: MyThemeData.commonColor,
                           padding: EdgeInsets.symmetric(
-                              horizontal: width * 0.15, vertical: 15),
+                              horizontal: width * 0.1, vertical: 15),
                           textStyle: TextStyle(fontSize: 16),
+                        ),
+                        child: TextProfile(
+                          text: ("Edit Profile"),
+                          TextSize: 20,
+                          color: MyThemeData.darkColor,
                         ),
                       ),
                       // Exit Button
@@ -121,13 +124,22 @@ backgroundColor: MyThemeData.darkColor,
                             );
                           } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text(
                                     "Failed to log out. Please try again."),
                               ),
                             );
                           }
                         },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          backgroundColor: Colors.red,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 50, vertical: 15),
+                          textStyle: const TextStyle(fontSize: 16),
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -136,22 +148,27 @@ backgroundColor: MyThemeData.darkColor,
                               TextSize: 20,
                               color: MyThemeData.primaryColor,
                             ),
-                            SizedBox(width: 10),
-                            Icon(
+                            const SizedBox(width: 10),
+                            const Icon(
                               Icons.output_outlined,
                               color: Colors.white,
                             ),
                           ],
                         ),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          backgroundColor: Colors.red,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 15),
-                          textStyle: TextStyle(fontSize: 16),
-                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16),
+                        child:
+                      Text("my watch list",style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: MyThemeData.commonColor
+                      ),
+                      ),
                       ),
                     ],
                   ),
@@ -159,7 +176,14 @@ backgroundColor: MyThemeData.darkColor,
               ),
             ),
             // Additional Content Section
-            Container(
+
+            SizedBox(
+              height: 400,
+              child: StreamBuilder<QuerySnapshot<WatchlistModel>>(
+                stream: FirebaseManager.getMovies(),
+                builder: (context, snapshot) {
+                    return (snapshot.data?.docs.length == 0) 
+                    ? Container(
               width: width,
               height: height * 0.4,
               child: Center(
@@ -168,6 +192,26 @@ backgroundColor: MyThemeData.darkColor,
                   width: 125,
                   height: 125,
                 ),
+              ),
+            )
+           
+                    : GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Number of columns
+                    crossAxisSpacing: 10, // Spacing between columns
+                    mainAxisSpacing: 10, // Spacing between rows
+                    childAspectRatio: 0.8, // Aspect ratio of grid items
+                  ),
+                  itemCount: snapshot.data?.docs.length ?? 0, // Number of items in grid
+                  itemBuilder: (context, index) {
+                    return GridviewContent(
+                      movie: snapshot.data!.docs[index].data(),
+                    );
+                  
+                  }
+                    );
+                },
+             
               ),
             ),
           ],
@@ -183,13 +227,13 @@ backgroundColor: MyThemeData.darkColor,
       children: [
         TextProfile(
           text: count,
-          TextSize: 36,
+          TextSize: 30,
           color: MyThemeData.primaryColor,
         ),
         SizedBox(height: 10),
         TextProfile(
           text: label,
-          TextSize: 24,
+          TextSize: 26,
           color: MyThemeData.primaryColor,
         ),
       ],
