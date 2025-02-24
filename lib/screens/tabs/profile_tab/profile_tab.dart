@@ -11,9 +11,15 @@ import 'package:provider/provider.dart';
 import '../../../my_theme_data.dart';
 import '../../Edit_Screen.dart';
 
-class ProfileTab extends StatelessWidget {
+class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
 
+  @override
+  State<ProfileTab> createState() => _ProfileTabState();
+}
+
+class _ProfileTabState extends State<ProfileTab> {
+  int gridLength = 0;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -74,7 +80,7 @@ class ProfileTab extends StatelessWidget {
                       // Wishlist and History Counts
                       Row(
                         children: [
-                          _buildCountColumn("12", "Wish List"),
+                          _buildCountColumn(gridLength.toString(), "Wish List"),
                           SizedBox(width: width * 0.06),
                           _buildCountColumn("10", "History"),
                         ],
@@ -182,8 +188,22 @@ class ProfileTab extends StatelessWidget {
               child: StreamBuilder<QuerySnapshot<WatchlistModel>>(
                 stream: FirebaseManager.getMovies(),
                 builder: (context, snapshot) {
-                    return (snapshot.data?.docs.length == 0) 
+                    if (snapshot.hasData) {
+            final dataLength = snapshot.data!.docs.length;
+
+            // Update the state only if the length changes
+            if (gridLength != dataLength) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  gridLength = dataLength;
+                });
+              });
+            }
+          }
+
+          return (gridLength == 0)
                     ? Container(
+                      
               width: width,
               height: height * 0.4,
               child: Center(
@@ -200,10 +220,12 @@ class ProfileTab extends StatelessWidget {
                     crossAxisCount: 2, // Number of columns
                     crossAxisSpacing: 10, // Spacing between columns
                     mainAxisSpacing: 10, // Spacing between rows
-                    childAspectRatio: 0.8, // Aspect ratio of grid items
+                    childAspectRatio: 0.8,
+                     // Aspect ratio of grid items
                   ),
                   itemCount: snapshot.data?.docs.length ?? 0, // Number of items in grid
                   itemBuilder: (context, index) {
+                    
                     return GridviewContent(
                       movie: snapshot.data!.docs[index].data(),
                     );
