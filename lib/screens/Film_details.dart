@@ -152,7 +152,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                 Positioned(
                   bottom: Height * 0.0,
                   child: Text(
-                    movie.year.toString() ?? "", // the title of movie
+                    movie.year.toString() ?? "",
                     style: const TextStyle(
                       fontSize: 24,
                       color: Color(0xffADADAD),

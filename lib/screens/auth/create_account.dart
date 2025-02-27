@@ -3,19 +3,19 @@ import 'package:movies_app/firebase/firebase_manager.dart';
 
 // ignore: must_be_immutable
 class CreateAccount extends StatelessWidget {
-                      CreateAccount({super.key});
+  CreateAccount({super.key});
   static const String routeName = "createAccount";
 
   //final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-  TextEditingController nameController = TextEditingController();
+  static TextEditingController nameController = TextEditingController();
 
   TextEditingController emaillController = TextEditingController();
 
-  TextEditingController passwordController = TextEditingController();
+  static TextEditingController passwordController = TextEditingController();
 
   TextEditingController repasswordController = TextEditingController();
 
-  TextEditingController phoneContrller = TextEditingController();
+  static TextEditingController phoneContrller = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
 
@@ -265,7 +265,8 @@ class CreateAccount extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
                               title: Text("Success"),
-                              content: Text("Account created successfully!",style: TextStyle(color: Colors.black)),
+                              content: Text("Account created successfully!",
+                                  style: TextStyle(color: Colors.black)),
                               backgroundColor: const Color(0xffF6BD00),
                               actions: [
                                 ElevatedButton(
@@ -290,7 +291,10 @@ class CreateAccount extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
                               title: Text("Something went wrong"),
-                              content: Text(message,style: TextStyle(color: Colors.black),),
+                              content: Text(
+                                message,
+                                style: TextStyle(color: Colors.black),
+                              ),
                               backgroundColor: const Color(0xffF6BD00),
                               actions: [
                                 ElevatedButton(
