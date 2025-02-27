@@ -248,6 +248,7 @@ class CreateAccount extends StatelessWidget {
                           ),
                         ),
                       );
+                      Navigator.pop(context);
 
                       FirebaseManager.createAccount(
                         emaillController.text,
@@ -262,6 +263,7 @@ class CreateAccount extends StatelessWidget {
                           // Close the loading dialog
                           await loadingDialog; // Await before closing to ensure it works correctly
                           Navigator.pop(context);
+                          //Navigator.pop(context);
                           // Close the loading dialog
                           // Show success dialog
                           showDialog(
@@ -282,6 +284,7 @@ class CreateAccount extends StatelessWidget {
                               ],
                             ),
                           );
+                          
                         },
                         // on Error
                         (message) async {
