@@ -37,10 +37,10 @@ class MyApp extends StatelessWidget {
       theme: MyThemeData.lightTheme,
       debugShowCheckedModeBanner: false,
 
-      initialRoute: LoginScreen.routeName,
-      //  provider.firebaseUser == null
-      //     ? LoginScreen.routeName
-      //     : HomeScreen.routeName,
+      initialRoute:
+       provider.firebaseUser == null
+          ? LoginScreen.routeName
+          : HomeScreen.routeName,
      
       routes: {
         LoginScreen.routeName : (context)=> LoginScreen(),
