@@ -17,6 +17,8 @@ class CreateAccount extends StatelessWidget {
 
   TextEditingController phoneContrller = TextEditingController();
 
+  String imageUrl = "assets/images/gamer.png";
+
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -46,13 +48,13 @@ class CreateAccount extends StatelessWidget {
               children: [
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Image.asset(
-                    "assets/images/splash3x (3).png",
-                    height: 200,
-                    width: 200,
+                    imageUrl,
+                    height: 170,
+                    width: 170,
                     fit: BoxFit.fill,
                   ),
                 ]),
-
+                      const SizedBox(height: 10,),
                 TextFormField(
                   controller: nameController,
                   validator: (value) {
@@ -252,6 +254,7 @@ class CreateAccount extends StatelessWidget {
                         passwordController.text,
                         nameController.text,
                         phoneContrller.text,
+                        imageUrl,
                         // on Loading (not needed, as loading dialog is already shown)
                         () {},
                         // on Success

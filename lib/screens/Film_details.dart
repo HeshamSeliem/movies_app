@@ -116,15 +116,28 @@ class _FilmDetailsState extends State<FilmDetails> {
                       IconButton(
                         onPressed: () {
                           widget.iconColor = Colors.yellow;
-                             setState(() {});
-               //now i create a model and passed it to firebase manager to add it to the firestore              
-                             WatchlistModel film = WatchlistModel(
-                              id: FirebaseAuth.instance.currentUser!.uid, // the id of user
-                               image: movie.mediumCoverImage.toString(), // the image of movie
-                                rating: movie.rating!.toDouble(),
-                                );
-                              FirebaseManager.addMovies(film);  
+                          setState(() {});
+                          //now i create a model and passed it to firebase manager to add it to the firestore
+                          WatchlistModel film = WatchlistModel(
+                            id: FirebaseAuth
+                                .instance.currentUser!.uid, // the id of user
+                            image: movie.mediumCoverImage
+                                .toString(), // the image of movie
+                            rating: movie.rating!.toDouble(),
+                          );
+                          FirebaseManager.addMovies(film);
                           // Add bookmark functionality here
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text("Success Add"),
+                                  content: const Text(
+                                      "Film added to watch list successfully!",
+                                      style: TextStyle(color: Colors.black)),
+                                  backgroundColor: Colors.grey[500],
+                                );
+                              });
                         },
                         icon: Icon(
                           Icons.bookmark_outlined,

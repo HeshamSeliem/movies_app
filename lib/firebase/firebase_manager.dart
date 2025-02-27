@@ -31,7 +31,7 @@ class FirebaseManager {
   }
 
   // by this function i can pass email and password to it and it will create them
-  static Future<void> createAccount(String emailAddress, String password,String name, String phoneNumber,
+  static Future<void> createAccount(String emailAddress, String password,String name, String phoneNumber,String imageUrl, 
       Function onSuccess, Function onLoading, Function onError) async {
     try {
       onLoading();
@@ -47,7 +47,8 @@ class FirebaseManager {
              id: credential.user!.uid,
              name: name,
               email: emailAddress,
-               phoneNumber: phoneNumber
+               phoneNumber: phoneNumber,
+               imagePath: imageUrl,
                );
           addUser(userModel);
       onSuccess();

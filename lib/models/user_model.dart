@@ -3,12 +3,14 @@ class UserModel {
   String name;
   String email;
   String phoneNumber;
+  String imagePath;
     
      UserModel({
       required this.id,
       required this.name,
       required this.email,
       required this.phoneNumber,
+      required this.imagePath
      });
 
      UserModel.fromJson(Map<String , dynamic> json) : this
@@ -17,6 +19,7 @@ class UserModel {
       name: json["name"],
       email: json["email"],
       phoneNumber: json["phoneNumber"],
+      imagePath: json["imagePath"] ?? ""
     );
 
     toJson(){
@@ -25,6 +28,7 @@ class UserModel {
         "name": name,
         "email": email,
         "phoneNumber": phoneNumber,
+        "imagePath": imagePath
       };
     }
 }

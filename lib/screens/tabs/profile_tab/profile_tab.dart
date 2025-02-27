@@ -57,12 +57,12 @@ class _ProfileTabState extends State<ProfileTab> {
                             Container(
                               width: 120,
                               height: 118,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white,
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
-                                  image: AssetImage('assets/images/gamer.png'),
+                                  image: AssetImage(provider.userModel!.imagePath),
                                 ),
                               ),
                             ),
