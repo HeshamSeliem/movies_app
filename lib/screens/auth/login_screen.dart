@@ -129,8 +129,8 @@ class LoginScreen extends StatelessWidget {
                   },
                       //on success
                       () {
-     //this line to read user data from firestore and pass it to provider to hold user data to use it in profile
-     // to change the screen and make rebuild to it                   
+                    //this line to read user data from firestore and pass it to provider to hold user data to use it in profile
+                    // to change the screen and make rebuild to it
                     userprovider.initUser();
                     Navigator.pushNamedAndRemoveUntil(
                       context,
