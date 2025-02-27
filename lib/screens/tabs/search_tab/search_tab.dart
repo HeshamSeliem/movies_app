@@ -52,7 +52,7 @@ class _FilmSearchScreenState extends State<FilmSearchScreen> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 10,
-          mainAxisSpacing: 10,k
+          mainAxisSpacing: 10,
           childAspectRatio: 0.7,
         ),
         itemCount: movies.length,
