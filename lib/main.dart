@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
 
       initialRoute:
        provider.firebaseUser == null
-          ? LoginScreen.routeName
+          ? Onboarding.routeName
           : HomeScreen.routeName,
      
       routes: {
@@ -48,8 +48,6 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName : (context)=> HomeScreen(),
         FilmDetails.routeName: (context) => FilmDetails(),
         Onboarding.routeName: (context) => Onboarding(),
-       
-
       },
     );
   }

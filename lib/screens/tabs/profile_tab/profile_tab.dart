@@ -82,7 +82,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         children: [
                           _buildCountColumn(gridLength.toString(), "Wish List"),
                           SizedBox(width: width * 0.06),
-                          _buildCountColumn("10", "History"),
+                          _buildCountColumn("0", "History"),
                         ],
                       ),
                     ],
