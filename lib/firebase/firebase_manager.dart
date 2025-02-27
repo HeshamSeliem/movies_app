@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:movies_app/models/user_model.dart';
 import 'package:movies_app/models/watchListModel.dart';
+import 'package:movies_app/provider/user_provider.dart';
 import 'package:movies_app/screens/auth/create_account.dart';
-
+import 'package:provider/provider.dart';
 class FirebaseManager {
   // this function to create user collection in firebase
   static CollectionReference<UserModel> getUserCollection() {
@@ -64,7 +68,7 @@ class FirebaseManager {
     }
   }
   //now i will create a function to login with email and password
-  static Future<void>logIn(String email , String password,Function onLoading , Function onSuccess , Function onError)
+  static Future<void>logIn(String email , String password,Function onLoading , Function onSuccess , Function onError )
   async{
     try {
       onLoading();
@@ -72,6 +76,7 @@ class FirebaseManager {
     email: email,
     password: password
   );
+   
     //  if(credential.user!.emailVerified)
     //  {
         onSuccess();
@@ -135,4 +140,21 @@ static CollectionReference<WatchlistModel> getMoviesCollection(){
     var collection = getMoviesCollection(); // first i hols the collection 
     return collection.doc(id).delete();// secend i go to the document depending on it is id and delete it
   }
+ static Future<void> updateUserName(String userId, String newName, BuildContext context) async {
+  DocumentReference userRef = FirebaseFirestore.instance.collection("Users").doc(userId);
+
+  try {
+    await userRef.update({"name": newName});
+
+    
+
+    print("✅ Name updated successfully!");
+  } catch (e) {
+    print("❌ Error updating name: $e");
+  }
 }
+
+
+
+}
+

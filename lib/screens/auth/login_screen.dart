@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/firebase/firebase_manager.dart';
 import 'package:movies_app/home_screen.dart';
@@ -159,7 +160,11 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                     );
-                  });
+                  },
+                       
+                      );
+                 // provider.fetchUserData(FirebaseAuth.instance.currentUser!.uid);
+
                 },
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),

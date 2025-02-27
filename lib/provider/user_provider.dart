@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/firebase/firebase_manager.dart';
@@ -25,4 +26,19 @@ class UserProvider extends ChangeNotifier{
       userModel =await FirebaseManager.readUser();
       notifyListeners();
      }
+     void updateUserName(String newName) {
+    if (userModel != null) {
+      userModel!.name = newName;
+      notifyListeners(); // 🔄 Notify UI to refresh
+    }
+     }
+     void fetchUserData(String userId) {
+  FirebaseFirestore.instance.collection("users").doc(userId).snapshots().listen((snapshot) {
+    if (snapshot.exists) {
+      userModel = UserModel.fromJson(snapshot.data()!);
+      notifyListeners(); // 🔄 Refresh UI
+    }
+  });
+}
+
 }

@@ -1,7 +1,11 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:movies_app/firebase/firebase_manager.dart';
+import 'package:movies_app/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 import '../my_theme_data.dart';
 import 'Text_Profile.dart';
 import 'auth/create_account.dart';
@@ -14,6 +18,9 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController repasswordController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
 
   File? _pickedImage;
@@ -29,6 +36,7 @@ class _EditScreenState extends State<EditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true, // Adjust layout for keyboard
       appBar: AppBar(
@@ -43,34 +51,36 @@ class _EditScreenState extends State<EditScreen> {
         padding: const EdgeInsets.all(16), // Add padding to avoid edge sticking
         child: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch children horizontally
+            crossAxisAlignment:
+                CrossAxisAlignment.stretch, // Stretch children horizontally
             children: [
               // Display the picked image if available
               _pickedImage != null
                   ? GestureDetector(
-                onTap: _pickImageFromGallery,
-                child: CircleAvatar(
-                  radius: 60,
-                  backgroundImage: FileImage(_pickedImage!),
-                ),
-              )
+                      onTap: _pickImageFromGallery,
+                      child: CircleAvatar(
+                        radius: 60,
+                        backgroundImage: FileImage(_pickedImage!),
+                      ),
+                    )
                   : GestureDetector(
-                onTap: _pickImageFromGallery,
-                child: CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Colors.grey[300],
-                  child: Icon(
-                    Icons.person,
-                    size: 60,
-                    color: Colors.grey[600],
-                  ),
-                ),
-              ),
+                      onTap: _pickImageFromGallery,
+                      child: CircleAvatar(
+                        radius: 60,
+                        backgroundColor: Colors.grey[300],
+                        child: Icon(
+                          Icons.person,
+                          size: 60,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
               const SizedBox(height: 20),
 
               // Name Field
               TextFormField(
-                controller: CreateAccount.nameController,
+                controller: nameController,
+                //CreateAccount.nameController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Name is Required";
@@ -78,13 +88,13 @@ class _EditScreenState extends State<EditScreen> {
                   return null;
                 },
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                      fontWeight: FontWeight.w500,
+                    ),
                 decoration: InputDecoration(
                   hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
                   hintText: "Name",
                   prefixIcon: const Icon(
                     Icons.person,
@@ -105,7 +115,8 @@ class _EditScreenState extends State<EditScreen> {
 
               // Password Field
               TextFormField(
-                controller: CreateAccount.passwordController,
+                controller: passwordController,
+                // CreateAccount.passwordController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Password is Required";
@@ -113,13 +124,13 @@ class _EditScreenState extends State<EditScreen> {
                   return null;
                 },
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                      fontWeight: FontWeight.w500,
+                    ),
                 decoration: InputDecoration(
                   hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
                   hintText: "Password",
                   prefixIcon: const Icon(
                     Icons.lock_clock_sharp,
@@ -145,7 +156,8 @@ class _EditScreenState extends State<EditScreen> {
 
               // Phone Number Field
               TextFormField(
-                controller: CreateAccount.phoneContrller,
+                controller: repasswordController,
+                //CreateAccount.phoneContrller,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Phone is Required";
@@ -153,13 +165,13 @@ class _EditScreenState extends State<EditScreen> {
                   return null;
                 },
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                      fontWeight: FontWeight.w500,
+                    ),
                 decoration: InputDecoration(
                   hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
                   hintText: "Phone Number",
                   prefixIcon: const Icon(
                     Icons.phone,
@@ -209,8 +221,10 @@ class _EditScreenState extends State<EditScreen> {
 
               // Update Data Button
               ElevatedButton(
-                onPressed: () {
-                  // Placeholder for update data logic
+                onPressed: () async {
+                  await FirebaseManager.updateUserName(
+                      provider.userModel!.id, nameController.text, context);
+                    
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
